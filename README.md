@@ -1,138 +1,78 @@
-<!DOCTYPE html>
-<html lang="en">
+# Web Scraping and Text Retrieval
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      line-height: 1.6;
-      margin: 0;
-      padding: 20px;
-    }
+This repository contains a Python script for web scraping and text retrieval from a given website. The script utilizes the `requests`, `beautifulsoup4`, `urllib`, `pathlib`, and `google.colab` libraries to retrieve and save text content from web pages.
 
-    h1 {
-      font-family: 'Times New Roman', Times, serif;
-      font-size: 28px;
-      margin-top: 0;
-    }
+## Getting Started
 
-    h2 {
-      font-family: 'Arial Black', sans-serif;
-      font-size: 22px;
-    }
+To get started with this script, follow the instructions below.
 
-    p {
-      font-family: 'Courier New', monospace;
-      margin-bottom: 10px;
-    }
+### Prerequisites
 
-    code {
-      font-family: Consolas, Monaco, 'Andale Mono', monospace;
-      background-color: #f1f1f1;
-      padding: 3px;
-      border-radius: 3px;
-    }
+- Python 3.6 or higher
+- Install the required libraries using the following command:
+  ```bash
+  pip install requests beautifulsoup4 google-colab
+  ```
 
-    pre {
-      font-family: 'Lucida Console', Monaco, monospace;
-      background-color: #f1f1f1;
-      padding: 10px;
-      border-radius: 5px;
-      overflow-x: auto;
-    }
+### Usage
 
-    .important {
-      font-weight: bold;
-      color: #c00;
-    }
+1. Clone this repository to your local machine or download the script file directly.
+2. Open the script file (`scrape_text.py`) in a text editor of your choice.
 
-    .highlight {
-      background-color: yellow;
-    }
+### Configuration
 
-    .container {
-      max-width: 800px;
-      margin: 0 auto;
-    }
-  </style>
-</head>
+1. Mount Google Drive by running the following command:
+   ```python
+   from google.colab import drive
+   drive.mount('/content/drive')
+   ```
+   This step is required to save the retrieved text files to Google Drive.
 
-<body>
-  <div class="container">
-    <h1>Web Scraping and Text Retrieval</h1>
+2. Set the `url` variable to the URL of the main page you want to start scraping from:
+   ```python
+   url = 'https://quod.lib.umich.edu/c/cme/browse.html'
+   ```
 
-    <p>This repository contains a Python script for web scraping and text retrieval from a given website. The script
-      utilizes the <code>requests</code>, <code>beautifulsoup4</code>, <code>urllib</code>, <code>pathlib</code>, and
-      <code>google.colab</code> libraries to retrieve and save text content from web pages.</p>
+### Running the Script
 
-    <h2>Getting Started</h2>
+To run the script, execute the following command:
+```bash
+python scrape_text.py
+```
 
-    <p>To get started with this script, follow the instructions below.</p>
+The script will start following the links from the main page specified in the `url` variable. It will recursively retrieve text content from nested links and save them as `.txt` files in the specified Google Drive directory.
 
-    <h3>Prerequisites</h3>
+### Displaying All Fonts
 
-    <ul>
-      <li>Python 3.6 or higher</li>
-      <li>Install the required libraries using the following command:</li>
-    </ul>
+To display all the available fonts, you can modify the script as follows:
 
-    <pre><code>pip install requests beautifulsoup4 google-colab</code></pre>
+1. Import the necessary libraries:
+   ```python
+   import matplotlib.pyplot as plt
+   import matplotlib.font_manager as fm
+   ```
 
-    <h3>Usage</h3>
+2. Add the following code snippet after the line `drive.mount('/content/drive')`:
+   ```python
+   # Get a list of all available fonts
+   all_fonts = fm.findSystemFonts()
 
-    <ol>
-      <li>Clone this repository to your local machine or download the script file directly.</li>
-      <li>Open the script file (<code>scrape_text.py</code>) in a text editor of your choice.</li>
-    </ol>
+   # Display each font name
+   for font_path in all_fonts:
+       font_name = fm.get_font(font_path).family_name
+       print(font_name)
+   ```
 
-    <h3>Configuration</h3>
+   This code will retrieve a list of all available fonts on your system and print their names.
 
-    <ol>
-      <li>Mount Google Drive by running the following command:</li>
-    </ol>
+## Contributing
 
-    <pre><code>from google.colab import drive
-drive.mount('/content/drive')</code></pre>
+Contributions to this repository are welcome. If you find any issues or have suggestions for improvements, please create a pull request or open an issue.
 
-    <p>This step is required to save the retrieved text files to Google Drive.</p>
+## License
 
-    <ol start="2">
-      <li>Set the <code>url</code> variable to the URL of the main page you want to start scraping from:</li>
-    </ol>
+This project is licensed under the [MIT License](LICENSE).
 
-    <pre><code>url = 'https://quod.lib.umich.edu/c/cme/browse.html'</code></pre>
+## Acknowledgments
 
-    <h3>Running the Script</h3>
-
-    <p>To run the script, execute the following command:</p>
-
-    <pre><code>python scrape_text.py</code></pre>
-
-    <p>The script will start following the links from the main page specified in the <code>url</code> variable. It
-      will recursively retrieve text content from nested links and save them as <code>.txt</code> files in the specified
-      Google Drive directory.</p>
-
-    <h2>Contributing</h2>
-
-    <p>Contributions to this repository are welcome. If you find any issues or have suggestions for improvements, please
-      create a pull request or open an issue.</p>
-
-    <h2>License</h2>
-
-    <p>This project is licensed under the <a href="LICENSE">MIT License</a>.</p>
-
-    <h2>Acknowledgments</h2>
-
-    <ul>
-      <li>The <code>requests</code>, <code>beautifulsoup4</code>, <code>urllib</code>, <code>pathlib</code>, and
-        <code>google.colab</code> libraries for their functionalities used in this script.</li>
-      <li>The developers of the websites being scraped for providing valuable content.</li>
-    </ul>
-
-    <p>Feel free to customize this README file to suit your project's needs.</p>
-  </div>
-</body>
-
-</html>
+- The developers of the websites being scraped for providing the text in the public domain so that they can be used freely for any purpose.
